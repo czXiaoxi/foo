@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Root Context: defines shared resources visible to all other web components -->
+    <context:component-scan base-package="com.fooxi">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- web Filter bean -->
+    <bean id="webapi_security" class="com.fooxi.foo.web.framework.WebAPISecurityFilter"/>
+
+    <bean id="filterMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding">
+            <value>utf-8</value>
+        </property>
+    </bean>
+
+    <!-- http util -->
+    <bean id="httpUtil" class="com.fooxi.wechat.common.util.http.HttpRequest"/>
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <!--&lt;!&ndash;本地环境 &ndash;&gt;-->
+            <list>
+                <value>classpath:properties/database.properties</value>
+                <value>classpath:properties/wechat.properties</value>
+                <value>classpath:properties/game.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="UTF-8"/>
+        <property name="ignoreResourceNotFound" value="false"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+    <import resource="database-config.xml"/>
+    <!--<import resource="threadpoll-config.xml"/>-->
+
+    <!--<import resource="schedule-workers.xml"/>-->
+
+</beans>
+

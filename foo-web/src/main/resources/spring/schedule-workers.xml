@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 					http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        				">
+
+    <!--<bean id="checkInWorker"  class="com.fooxi.broker.worker.CheckInWorker"/>-->
+    <!--&lt;!&ndash; 自动打卡worker &ndash;&gt;-->
+    <!--<bean id="voucherWorkerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="checkInWorker" />-->
+        <!--<property name="targetMethod" value="exec" />-->
+
+    <!--</bean>-->
+    <!--&lt;!&ndash; 自动打卡trigger &ndash;&gt;-->
+    <!--<bean id="checkinWorkerScheduledJobTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="voucherWorkerJob" />-->
+        <!--&lt;!&ndash; 每天9点, 16点, 20点, 22点执行 &ndash;&gt;-->
+        <!--<property name="cronExpression" value="0 30 9,13,21 * * ?" />-->
+    <!--</bean>-->
+
+
+    <!--<bean id="syncPoi" class="com.fooxi.broker.worker.PoiSyncWorker"/>-->
+    <!--&lt;!&ndash; sync poi &ndash;&gt;-->
+    <!--<bean id="syncPoiWorker" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="syncPoi" />-->
+        <!--<property name="targetMethod" value="sync" />-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; sync poi &ndash;&gt;-->
+    <!--<bean id="poiWorkerScheduledJobTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="syncPoiWorker" />-->
+        <!--&lt;!&ndash;for run per Min&ndash;&gt;-->
+        <!--<property name="cronExpression" value="0 0/1 * * * ?" />-->
+    <!--</bean>-->
+
+
+    <!--&lt;!&ndash; Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler &ndash;&gt;-->
+    <!--<bean  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+        <!--<property name="jobDetails">-->
+            <!--<list>-->
+                <!--<ref bean="voucherWorkerJob" />-->
+                <!--<ref bean="syncPoiWorker" />-->
+            <!--</list>-->
+        <!--</property>-->
+
+        <!--<property name="triggers">-->
+            <!--<list>-->
+                <!--<ref bean="checkinWorkerScheduledJobTrigger" />-->
+                <!--<ref bean="poiWorkerScheduledJobTrigger" />-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+</beans>
